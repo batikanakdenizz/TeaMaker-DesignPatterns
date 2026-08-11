@@ -168,13 +168,18 @@ All database interactions are handled through:
  ```
 teaMakerDB.sql
  ```
-3.Update credentials in:
+3. Set the database credentials as environment variables. They are read at startup, so no
+   password is stored in the source:
+ ```bash
+ export TEAMAKER_DB_USER=root
+ export TEAMAKER_DB_PASSWORD=your_password
+ # optional; defaults to jdbc:mysql://localhost:3306/teaMakerDB
+ export TEAMAKER_DB_URL="jdbc:mysql://localhost:3306/teaMakerDB?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Europe/Istanbul"
  ```
-src/DBConnection.java
- ```
- ```
-private static final String USER = "root";
-private static final String PASSWORD = "YOUR_PASSWORD";
+ On Windows PowerShell:
+ ```powershell
+ $env:TEAMAKER_DB_USER = "root"
+ $env:TEAMAKER_DB_PASSWORD = "your_password"
  ```
 
 ---
