@@ -9,11 +9,15 @@ import java.sql.SQLException;
 
 public class DBConnection {
 
-    private static final String URL =
-"jdbc:mysql://localhost:3306/teaMakerDB?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Europe/Istanbul";
+    // Local development defaults; the password always comes from the environment.
+    // Set TEAMAKER_DB_URL / TEAMAKER_DB_USER / TEAMAKER_DB_PASSWORD before running.
+    private static final String URL = System.getenv().getOrDefault(
+            "TEAMAKER_DB_URL",
+            "jdbc:mysql://localhost:3306/teaMakerDB?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=Europe/Istanbul");
 
-    private static final String USER = "root";
-    private static final String PASSWORD = "12345678"; // şifre varsa yaz
+    private static final String USER = System.getenv().getOrDefault("TEAMAKER_DB_USER", "root");
+
+    private static final String PASSWORD = System.getenv().getOrDefault("TEAMAKER_DB_PASSWORD", "");
 
     public static Connection getConnection() throws SQLException {
         return DriverManager.getConnection(URL, USER, PASSWORD);
